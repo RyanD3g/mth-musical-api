@@ -1,14 +1,18 @@
+import { inject, injectable } from "tsyringe";
 import { UserEntitie } from "../../entities/User.entitie";
 import { ISendMail } from "../../providers/Imail.provider";
 import { IUserRepositorie } from "../../repositories/IUserRepositorie";
 import { IUser } from "./User.DTO";
 
+@injectable()
 export class UserUseCase{
     constructor(
         
+        @inject("CreateUser")
         private IUserRequests: IUserRepositorie,
+        @inject("MailService")
         private MailImplementation: ISendMail,
-        
+
         ){};
 
     async excute(data: IUser | any): Promise<void>{
